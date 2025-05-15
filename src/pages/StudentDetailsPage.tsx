@@ -1,17 +1,20 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Loader, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import NavBar from "@/components/NavBar";
 import { StudentData } from "@/types/student";
-import { toast } from "sonner";
+import { useToast } from "@/components/ui/toaster";
 import { useAuth } from "@/contexts/AuthContext";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import WaitingForApproval from "@/components/WaitingForApproval";
 
 const StudentDetailsPage = () => {
   const location = useLocation();
+  const { toast } = useToast();
   const { user } = useAuth();
   const studentData = location.state?.studentData as StudentData;
   const [processingApproval, setProcessingApproval] = useState(false);
@@ -24,9 +27,43 @@ const StudentDetailsPage = () => {
     status: 'approved';
     staffId: string;
   }>>([]);
+  
+  // Check if admin has approved the exam
+  const [examApproved, setExamApproved] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate checking for admin approval
+    const checkExamApproval = () => {
+      setLoading(true);
+      // This would be an API call in a real application
+      setTimeout(() => {
+        // For demo purposes, we'll set it to false initially
+        // In a real app, this would come from your backend
+        setExamApproved(false);
+        setLoading(false);
+      }, 1000);
+    };
+
+    checkExamApproval();
+  }, []);
 
   if (!studentData) {
     return <Navigate to="/scan" replace />;
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader className="animate-spin h-8 w-8 text-university-blue" />
+        <span className="ml-2">Checking exam status...</span>
+      </div>
+    );
+  }
+
+  // If exam not approved, show waiting screen
+  if (!examApproved) {
+    return <WaitingForApproval />;
   }
 
   const isPermitValid = true; // All students have cleared fees
@@ -51,7 +88,11 @@ const StudentDetailsPage = () => {
       setScanHistory([newScanRecord, ...scanHistory]);
       
       setProcessingApproval(false);
-      toast.success("Permit approved successfully!");
+      toast({
+        title: "Success",
+        description: "Permit approved successfully!",
+        variant: "default",
+      });
     }, 1500);
   };
 

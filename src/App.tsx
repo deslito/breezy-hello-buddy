@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,6 +23,7 @@ import AdminDashboardPage from "./pages/AdminDashboardPage";
 import ManagePermitsPage from "./pages/ManagePermitsPage";
 import SettingsPage from "./pages/SettingsPage";
 import ManageInvigilatorsPage from "./pages/ManageInvigilatorsPage";
+import ExamApprovalPage from "./pages/ExamApprovalPage";
 
 const queryClient = new QueryClient();
 
@@ -82,6 +84,7 @@ const AppRoutes = () => {
       <Route path="/manage-students" element={<ProtectedRoute requiredRoles={["admin"]}><ManageStudentsPage /></ProtectedRoute>} />
       <Route path="/manage-invigilators" element={<ProtectedRoute requiredRoles={["admin"]}><ManageInvigilatorsPage /></ProtectedRoute>} />
       <Route path="/manage-permits" element={<ProtectedRoute requiredRoles={["admin"]}><ManagePermitsPage /></ProtectedRoute>} />
+      <Route path="/exam-approval" element={<ProtectedRoute requiredRoles={["admin"]}><ExamApprovalPage /></ProtectedRoute>} />
       <Route path="/settings" element={<ProtectedRoute requiredRoles={["admin"]}><SettingsPage /></ProtectedRoute>} />
       
       {/* Common Routes */}

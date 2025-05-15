@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Users, User, Settings, Home, Menu, LogOut, CreditCard } from "lucide-react";
+import { Users, User, Settings, Home, Menu, LogOut, CreditCard, Calendar } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -27,6 +27,7 @@ const AdminSidebar = () => {
 
   const navigation = [
     { name: "Dashboard", href: "/", icon: Home },
+    { name: "Exam Approval", href: "/exam-approval", icon: Calendar },
     { name: "Manage Students", href: "/manage-students", icon: Users },
     { name: "Manage Invigilators", href: "/manage-invigilators", icon: User },
     { name: "Manage Permits", href: "/manage-permits", icon: CreditCard },
