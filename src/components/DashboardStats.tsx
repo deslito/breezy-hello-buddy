@@ -1,10 +1,10 @@
 
 import React, { useState } from "react";
-import { Calendar, ChevronDown, User, CheckCircle, Clock, CreditCard } from "lucide-react";
+import { Calendar, ChevronDown, CheckCircle, Clock, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CourseUnit } from "@/types/student";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 
 interface DashboardStatsProps {
   username: string;
@@ -26,6 +26,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
   examDate,
 }) => {
   const [showCourseUnits, setShowCourseUnits] = useState(false);
+  const { toast } = useToast();
   
   // Mock course units data
   const courseUnits: CourseUnit[] = [
@@ -77,7 +78,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
         <h1 className="text-2xl font-bold">Welcome back,</h1>
         <p className="opacity-90 font-medium">{username}</p>
         <div className="text-xs opacity-75 mt-1">
-          Reg: {regNumber} • {semester}
+          Staff ID: {regNumber} • {semester}
         </div>
       </div>
 
@@ -85,21 +86,21 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
       <div className="px-4 -mt-6">
         <div className="glass-card p-4 flex justify-between">
           <div className="flex flex-col items-center transition-transform hover:scale-105 cursor-pointer">
-            <div className="text-xs text-muted-foreground">Permit</div>
+            <div className="text-xs text-muted-foreground">Verification</div>
             <div className="flex items-center mt-1 font-medium">
               {getStatusIcon(permitStatus)}
               <span className="ml-1 capitalize">{permitStatus}</span>
             </div>
           </div>
           <div className="flex flex-col items-center transition-transform hover:scale-105 cursor-pointer">
-            <div className="text-xs text-muted-foreground">Payment</div>
+            <div className="text-xs text-muted-foreground">Registration</div>
             <div className="flex items-center mt-1 font-medium">
               <CheckCircle className="w-5 h-5 text-permit-valid" />
               <span className="ml-1">{paymentStatus}</span>
             </div>
           </div>
           <div className="flex flex-col items-center transition-transform hover:scale-105 cursor-pointer">
-            <div className="text-xs text-muted-foreground">Progress</div>
+            <div className="text-xs text-muted-foreground">Attendance</div>
             <div className="flex items-center mt-1 font-medium">
               <div className="w-12 bg-muted h-1.5 rounded-full overflow-hidden">
                 <div
@@ -115,7 +116,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
 
       {/* Upcoming Exam Section */}
       <section className="mt-6">
-        <h2 className="text-lg font-semibold mb-3 px-4">Current Semester</h2>
+        <h2 className="text-lg font-semibold mb-3 px-4">Current Examination</h2>
         <Card>
           <CardContent className="p-4">
             <div className="flex justify-between items-center">
@@ -123,7 +124,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
                 <Calendar className="w-10 h-10 p-2 rounded-lg bg-muted text-university-blue" />
                 <div className="ml-4">
                   <h3 className="font-medium">{semester}</h3>
-                  <p className="text-sm text-muted-foreground">Next Exam: {examDate}</p>
+                  <p className="text-sm text-muted-foreground">Exam Date: {examDate}</p>
                 </div>
               </div>
               <Button
@@ -138,7 +139,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({
             
             {showCourseUnits && (
               <div className="mt-4 border-t pt-4">
-                <h4 className="font-medium text-sm mb-3">Enrolled Course Units</h4>
+                <h4 className="font-medium text-sm mb-3">Course Units</h4>
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs">
                     <thead className="border-b">
