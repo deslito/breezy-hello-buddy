@@ -1,18 +1,8 @@
-# Welcome to your Lovable project
+**Title**
+Smart-Exam-Permit-Management-System
 
-## Project info
-
-**URL**: https://lovable.dev/projects/c5fd3b91-777d-4e7a-bda6-c2dae593ace9
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/c5fd3b91-777d-4e7a-bda6-c2dae593ace9) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+**Description**
+A streamlined system designed for universities and colleges to automate the management and verification of examination permits. This project ensures students can securely access their permits, exam supervisors can verify eligibility in real-time, and administrators can manage permit approvals efficiently.
 
 **Use your preferred IDE**
 
@@ -20,7 +10,8 @@ If you want to work locally using your own IDE, you can clone this repo and push
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Follow these steps:
+**Follow these steps:**
+in case of a zipped file go stright to step 4
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
@@ -60,14 +51,44 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Login Credentials
 
-Simply open [Lovable](https://lovable.dev/projects/c5fd3b91-777d-4e7a-bda6-c2dae593ace9) and click on Share -> Publish.
+Login Credentials
 
-## Can I connect a custom domain to my Lovable project?
+admin
+-email: admin@kyu.edu
+-password: admin
 
-Yes, you can!
+invigilators
+-Dr. Mugisha Joel
+-Ms. Nakirayi Sophia
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Dr. Mugisha Joel
+-email: mugishajoel@kyu.edu
+-password: joel
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Ms. Nakirayi Sophia
+-email: nakirayisophia@kyu.edu
+-password: sophia
+
+Students
+-Asiimire Tracy
+-Mubiru Timothy
+-Muyingo Cynthia
+-Twijukye David
+
+Asiimire Tracy
+-email: asiimiretracy@gmail.com
+-password:tracy
+
+Mubiru Timothy
+-email: mubirutimothy@gmail.com
+-password:timothy
+
+Muyingo Cynthia
+-email: muyingocynthia@gmail.com
+-password:cynthia
+
+Twijukye David
+-email:
+-password:david
