@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Clock, Calendar, AlertCircle } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/components/ui/toaster";
+import { toast } from "sonner";
 
 interface ExamSession {
   id: string;
@@ -21,7 +21,6 @@ interface ExamSession {
 }
 
 const ExamApprovalPage = () => {
-  const { toast } = useToast();
   const [examSessions, setExamSessions] = useState<ExamSession[]>([
     {
       id: "EX001",
@@ -62,11 +61,7 @@ const ExamApprovalPage = () => {
       )
     );
     
-    toast({
-      title: "Exam Approved",
-      description: "Invigilators can now verify students for this exam",
-      variant: "default",
-    });
+    toast.success("Exam Approved. Invigilators can now verify students for this exam");
   };
 
   const formatDate = (dateStr: string) => {

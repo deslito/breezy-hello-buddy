@@ -1,20 +1,20 @@
 
 import React, { useState, useEffect } from "react";
-import { useLocation, Navigate } from "react-router-dom";
-import { CheckCircle, Loader, AlertTriangle } from "lucide-react";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
+import { CheckCircle, Loader, AlertTriangle, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import NavBar from "@/components/NavBar";
 import { StudentData } from "@/types/student";
-import { useToast } from "@/components/ui/toaster";
+import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import WaitingForApproval from "@/components/WaitingForApproval";
 
 const StudentDetailsPage = () => {
   const location = useLocation();
-  const { toast } = useToast();
+  const navigate = useNavigate();
   const { user } = useAuth();
   const studentData = location.state?.studentData as StudentData;
   const [processingApproval, setProcessingApproval] = useState(false);
@@ -30,7 +30,12 @@ const StudentDetailsPage = () => {
   
   // Check if admin has approved the exam
   const [examApproved, setExamApproved] = useState<boolean>(false);
+  // Check if exam is expired (more than 4 hours since approval)
+  const [examExpired, setExamExpired] = useState<boolean>(false);
   const [loading, setLoading] = useState(true);
+  
+  // Force state for demo purposes
+  const forceState = location.state?.forceState;
 
   useEffect(() => {
     // Simulate checking for admin approval
@@ -38,15 +43,23 @@ const StudentDetailsPage = () => {
       setLoading(true);
       // This would be an API call in a real application
       setTimeout(() => {
-        // For demo purposes, we'll set it to false initially
-        // In a real app, this would come from your backend
-        setExamApproved(false);
+        // For demo purposes, use the forceState if provided
+        if (forceState === "waiting") {
+          setExamApproved(false);
+          setExamExpired(false);
+        } else if (forceState === "expired") {
+          setExamApproved(true);
+          setExamExpired(true);
+        } else {
+          setExamApproved(true);
+          setExamExpired(false);
+        }
         setLoading(false);
       }, 1000);
     };
 
     checkExamApproval();
-  }, []);
+  }, [forceState]);
 
   if (!studentData) {
     return <Navigate to="/scan" replace />;
@@ -64,6 +77,11 @@ const StudentDetailsPage = () => {
   // If exam not approved, show waiting screen
   if (!examApproved) {
     return <WaitingForApproval />;
+  }
+
+  // If exam expired (more than 4 hours since approval), show expired screen
+  if (examExpired) {
+    return <ExamExpired />;
   }
 
   const isPermitValid = true; // All students have cleared fees
@@ -88,11 +106,7 @@ const StudentDetailsPage = () => {
       setScanHistory([newScanRecord, ...scanHistory]);
       
       setProcessingApproval(false);
-      toast({
-        title: "Success",
-        description: "Permit approved successfully!",
-        variant: "default",
-      });
+      toast.success("Permit approved successfully!");
     }, 1500);
   };
 
@@ -163,6 +177,46 @@ const StudentDetailsPage = () => {
       </div>
 
       <NavBar />
+    </div>
+  );
+};
+
+// Exam Expired Component
+const ExamExpired = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-b from-background to-background/90">
+      <div className="max-w-md w-full space-y-6 text-center">
+        <div className="mb-6">
+          <div className="flex justify-center">
+            <AlertTriangle className="h-16 w-16 text-university-orange" />
+          </div>
+        </div>
+        
+        <h1 className="text-2xl font-bold">Exam Session Expired</h1>
+        
+        <div>
+          <p className="text-muted-foreground mb-4">
+            This exam session has expired. The verification window was only available for 4 hours after admin approval.
+          </p>
+        </div>
+        
+        <Alert className="mt-8 border-university-orange/30 bg-university-orange/10">
+          <AlertDescription className="text-sm">
+            Please contact the exam administrator if you need to verify students for this exam.
+          </AlertDescription>
+        </Alert>
+        
+        <Button 
+          variant="outline" 
+          className="mt-6 hover:bg-university-blue/10"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Go Back
+        </Button>
+      </div>
     </div>
   );
 };
