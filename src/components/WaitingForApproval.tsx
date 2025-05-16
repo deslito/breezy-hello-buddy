@@ -50,45 +50,47 @@ const WaitingForApproval = () => {
         </Button>
       </div>
       
-      <style jsx>{`
-        @keyframes loading-bar {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        
-        .animate-loading-bar {
-          animation: loading-bar 1.5s infinite;
-        }
-        
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.6s forwards;
-        }
-        
-        .delay-100 {
-          animation-delay: 0.1s;
-          opacity: 0;
-        }
-        
-        .delay-200 {
-          animation-delay: 0.2s;
-          opacity: 0;
-        }
-        
-        .delay-300 {
-          animation-delay: 0.3s;
-          opacity: 0;
-        }
-        
-        .delay-400 {
-          animation-delay: 0.4s;
-          opacity: 0;
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes loading-bar {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+          
+          .animate-loading-bar {
+            animation: loading-bar 1.5s infinite;
+          }
+          
+          @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          
+          .animate-fade-in {
+            animation: fade-in 0.6s forwards;
+          }
+          
+          .delay-100 {
+            animation-delay: 0.1s;
+            opacity: 0;
+          }
+          
+          .delay-200 {
+            animation-delay: 0.2s;
+            opacity: 0;
+          }
+          
+          .delay-300 {
+            animation-delay: 0.3s;
+            opacity: 0;
+          }
+          
+          .delay-400 {
+            animation-delay: 0.4s;
+            opacity: 0;
+          }
+        `}
+      </style>
     </div>
   );
 };

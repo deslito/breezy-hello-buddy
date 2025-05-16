@@ -16,7 +16,6 @@ interface ExamSession {
   date: string;
   time: string;
   status: "pending" | "approved" | "completed";
-  venue: string;
   invigilators: number;
 }
 
@@ -29,7 +28,6 @@ const ExamApprovalPage = () => {
       date: "2025-05-16",
       time: "9:00 AM - 12:00 PM",
       status: "pending",
-      venue: "Block B Room 12",
       invigilators: 3
     },
     {
@@ -39,7 +37,6 @@ const ExamApprovalPage = () => {
       date: "2025-05-17",
       time: "2:00 PM - 5:00 PM",
       status: "pending",
-      venue: "Block A Room 5",
       invigilators: 2
     },
     {
@@ -49,7 +46,6 @@ const ExamApprovalPage = () => {
       date: "2025-05-18",
       time: "9:00 AM - 11:00 AM",
       status: "approved",
-      venue: "Computer Lab 3",
       invigilators: 4
     }
   ]);
@@ -122,7 +118,7 @@ const ExamApprovalPage = () => {
               <CardContent className="p-6">
                 <div className="flex items-center mb-6">
                   <Calendar className="mr-2 h-5 w-5 text-university-blue" />
-                  <h2 className="text-xl font-semibold">Upcoming Exam Sessions</h2>
+                  <h2 className="text-xl font-semibold">Today's Exam Sessions</h2>
                 </div>
 
                 <Table>
@@ -131,7 +127,6 @@ const ExamApprovalPage = () => {
                       <TableHead>Course</TableHead>
                       <TableHead>Date</TableHead>
                       <TableHead>Time</TableHead>
-                      <TableHead>Venue</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead className="text-right">Action</TableHead>
                     </TableRow>
@@ -147,7 +142,6 @@ const ExamApprovalPage = () => {
                         </TableCell>
                         <TableCell>{formatDate(exam.date)}</TableCell>
                         <TableCell>{exam.time}</TableCell>
-                        <TableCell>{exam.venue}</TableCell>
                         <TableCell>
                           <StatusBadge status={exam.status} />
                         </TableCell>

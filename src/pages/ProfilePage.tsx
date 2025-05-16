@@ -106,6 +106,12 @@ const ProfilePage = () => {
                 <span className="text-muted-foreground">Full Name</span>
                 <span>{user?.name}</span>
               </div>
+              {isAdmin && (
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Faculty</span>
+                  <span>School of Computing & Information Science</span>
+                </div>
+              )}
               {!isAdmin && (
                 <>
                   <div className="flex justify-between">
@@ -115,12 +121,12 @@ const ProfilePage = () => {
                   {isInvigilator && (
                     <>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Academic Year</span>
-                        <span>2025</span>
+                        <span className="text-muted-foreground">Faculty</span>
+                        <span>School of Computing & Information Science</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Semester</span>
-                        <span>II</span>
+                        <span className="text-muted-foreground">Academic Year</span>
+                        <span>2025</span>
                       </div>
                     </>
                   )}
@@ -257,4 +263,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-

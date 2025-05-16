@@ -2,7 +2,7 @@
 import React from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { BarChart2, CreditCard, Users, Calendar, AlertCircle, User } from "lucide-react";
+import { BarChart2, CreditCard, Users, Calendar, AlertCircle, User, BookOpen, GraduationCap } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
@@ -16,6 +16,14 @@ const AdminDashboardPage = () => {
     totalStudents: 2458,
     validPermits: 2458,
     verifiedToday: 200,
+  };
+
+  // Mock faculty data
+  const facultyInfo = {
+    name: "School of Computing & Information Science",
+    code: "SCIS",
+    departments: 4,
+    totalCourses: 45
   };
 
   const recentActivities = [
@@ -61,9 +69,13 @@ const AdminDashboardPage = () => {
             <div className="text-xs opacity-75 mt-1">Role: Administrator</div>
           </div>
 
-          {/* Quick Stats */}
+          {/* Faculty Information */}
           <div className="px-4 -mt-6">
             <div className="glass-card p-4">
+              <div className="flex items-center mb-4">
+                <GraduationCap className="w-5 h-5 text-university-blue mr-2" />
+                <h2 className="text-md font-semibold">Faculty: {facultyInfo.name}</h2>
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <StatCard
                   title="Total Students"
@@ -92,6 +104,29 @@ const AdminDashboardPage = () => {
                       value={statusDistribution.approved}
                       color="bg-permit-valid"
                     />
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Faculty Details */}
+            <section>
+              <h2 className="text-lg font-semibold mb-3">Faculty Details</h2>
+              <Card>
+                <CardContent className="p-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <span className="text-muted-foreground text-sm">Faculty Code</span>
+                      <span className="font-medium">{facultyInfo.code}</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-muted-foreground text-sm">Departments</span>
+                      <span className="font-medium">{facultyInfo.departments}</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-muted-foreground text-sm">Total Courses</span>
+                      <span className="font-medium">{facultyInfo.totalCourses}</span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
